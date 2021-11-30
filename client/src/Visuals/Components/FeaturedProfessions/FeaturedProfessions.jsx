@@ -22,7 +22,7 @@ const FeaturedProfessions = () => {
                     </div>
                 </section>
             </div>
-            <div className="wrapper padd-xl-tb bg-color-dark-a20">
+            <div className="wrapper padd-xl-tb bg-color-extra4-a40">
                 <section>
                     {featCateg&&featCateg.map(e=><FeaturedProfession key={e._id} profession={e}/>)}
                 </section>

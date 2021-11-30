@@ -1,8 +1,11 @@
 import React, {useState} from "react";
 import validate from "../../../Tools/validations";
-import { Link } from "react-router-dom";
 import {useSelector} from "react-redux"
 import { createUser } from "../../../ApiReq/users";
+import GoogleLogin from "react-google-login";
+import { GOOGLE_ID } from "../../../constants";
+import { sendMail } from "../../../ApiReq/mails";
+import Swal from 'sweetalert2'
 
 export default function RegisterFormUser(){
     const [newUser, setNewuser]= useState({
@@ -15,7 +18,6 @@ export default function RegisterFormUser(){
     })
     const [checked, setChecked]= useState(false)
     const [error, setError]= useState({})
-    const [done, setDone]= useState(false)
 
     const userData= useSelector((state) => {return state.userReducer.users})
 
@@ -59,7 +61,12 @@ export default function RegisterFormUser(){
     function handleSubmit(e) {
         e.preventDefault();
         if(!checked) {
-            alert("Por favor indica que aceptas los Términos y Condiciones");
+            Swal.fire({
+                icon: 'warning',
+                title: 'Acepta los terminos primero',
+                showConfirmButton: false,
+                timer: 1500
+            })
             return false
         }
         if(validate(newUser, setError, userData)){
@@ -74,116 +81,235 @@ export default function RegisterFormUser(){
             setError({})
             e.target.reset();
             createUser(newUser)
-            setDone(true)
+            sendMail('welcome',{
+                username:newUser.username,
+                email: newUser.email})
+            Swal.fire({
+                icon: 'success',
+                title: 'Cuenta creada!',
+                confirmButtonText: 'Iniciar sesión',
+                allowOutsideClick:false
+            }).then(function() {
+                window.location = "/ingresar";
+            })
+            createUser(newUser)
+            
         }
-      }
-    
-    if(!done){
-    return (
-        <div className="uk-padding uk-margin-left uk-flex uk-flex-center">
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" autoComplete="off">
-                <h2 className="p-2 text-2xl">Informacion personal - Cliente</h2>
-                <div className="mb-4 uk-flex uk-flex-row uk-flex-wrap">
-                    <div className="uk-flex uk-flex-column uk-form-width-large uk-margin-right">
-                        <label htmlFor="email" className="p-2"> Correo electronico </label>
-                        <input
-                        className="uk-input uk-form-width-large"
-                        type="email"
-                        name="email"
-                        id="email"
-                        autoComplete="off"
-                        placeholder="Ingresa tu email"
-                        onChange={handleChange}
-                        required/>
-                        {
-                            error.email ? <span className="uk-alert-danger">{error.email}</span> : null
-                        }
-                    </div>
-                    <div className="uk-flex uk-flex-column uk-form-width-large">
-                        <label htmlFor="username" className="p-2"> Nombre de usuario </label>
-                        <input
-                        className="uk-input uk-form-width-large"
-                        type="text"
-                        name="username"
-                        id="username"
-                        autoComplete="off"
-                        placeholder="Ingresa tu nombre de usuario" 
-                        onChange={handleChange}
-                        required/>
-                        {
-                            error.username ? <span className="uk-alert-danger">{error.username}</span> : null
-                        }
-                    </div>
-                </div>
-                <div className="mb-4 uk-flex uk-flex-row uk-flex-wrap">
-                    <div className="uk-flex uk-flex-column uk-form-width-large uk-margin-right">
-                        <label htmlFor="name" className="p-2"> Nombre </label>
-                        <input
-                        className="uk-input uk-form-width-large"
-                        type="text"
-                        name="name"
-                        id="name"
-                        placeholder="Ingresa tu nombre"
-                        autoComplete="off"
-                        onChange={handleChange}
-                        required/>
-                        {
-                            error.name ? <span className="uk-alert-danger">{error.name}</span> : null
-                        }
-                    </div>
-                    <div className="uk-flex uk-flex-column uk-form-width-large uk-margin-right">
-                        <label htmlFor="lastname" className="p-2"> Apellido </label>
-                        <input className="uk-input uk-form-width-large"  type="text"
-                        name="lastname" id="lastname"
-                        placeholder="Ingresa tu apellido" 
-                        onChange={handleChange}
-                        required/>
-                        {
-                            error.lastname ? <span className="uk-alert-danger">{error.lastname}</span> : null
-                        }
-                    </div>
-                </div>
-                
-                <div className="mb-4 uk-flex uk-flex-row uk-flex-wrap">
-                    <div className="uk-flex uk-flex-column uk-form-width-large uk-margin-right">
-                        <label htmlFor="password" className="p-2"> Contraseña - (minimo 6 caracteres) </label>
-                        <input className="uk-input uk-form-width-large"  type="password"
-                        name="password" id="password"
-                        placeholder="Ingresa tu contraseña" 
-                        onChange={handleChange}
-                        required/>
-                    </div>
-                    <div className="uk-flex uk-flex-column uk-form-width-large uk-margin-right">
-                        <label htmlFor="confirmPassword" className="p-2"> Confirmar contraseña </label>
-                        <input className="uk-input uk-form-width-large"  type="password"
-                        name="confirmPassword" id="confirmPassword"
-                        placeholder="Confirma tu contraseña" 
-                        onChange={handleChange}
-                        required/>
-                        {
-                            error.password ? <span className="uk-alert-danger">{error.password}</span> : null
-                        }
-                    </div>
-                </div>
-                
-                <div className="mb-4">
-                <label htmlFor="acceptT" className="p-2">Acepto los términos y condiciones del servicio</label>
-                <input className="uk-checkbox uk-margin-left"  type="checkbox"  name="acceptT" id="acceptT" checked={checked} onChange={handleChangeCheckbox}/>
-                </div>
-                <input className="uk-button uk-button-danger uk-margin" type="submit" value="Registrarse"/>
-            </form>
-        </div>
-    )}
-    if(done){
-        return (
-            <div className="w-full p-24 flex flex-col justify-center content-center">
-                <h1 className="text-3xl flex justify-center">Te has registrado exitosamente!</h1>
-                <div className="flex justify-center py-12">
-                <Link to="/ingresar" style={{ "textDecoration": "none", "color":"white" }} >
-                    <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded ">Iniciar sesion</button>
-                </Link>
-                </div>
-            </div>
-        )
     }
+    
+    const responseGoogle =async(res)=>{
+        const endUN = res.profileObj.email.indexOf('@')
+        if(userData.find(user=> user.email===res.profileObj.email)){
+            Swal.fire({
+                icon: 'warning',
+                title: "Esa cuenta de google ya esta registrada",
+                showConfirmButton: false,
+                timer: 1500
+            })
+            return false
+        }
+        if(!checked) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Acepta los terminos primero',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            return false
+        }
+        try{
+            createUser({
+                username:res.profileObj.email.slice(0, endUN),
+                name: res.profileObj.givenName,
+                lastname: res.profileObj.familyName,
+                password:res.profileObj.googleId,
+                confirmPassword:res.profileObj.googleId,
+                email: res.profileObj.email,
+                googleAccount: true
+            })
+            sendMail('welcome',{
+                username:res.profileObj.email.slice(0, endUN),
+                email:res.profileObj.email})
+            await Swal.fire({
+                icon: 'success',
+                title: 'Cuenta creada!',
+                confirmButtonText: 'Iniciar sesión',
+                allowOutsideClick:false
+            }).then(function() {
+                window.location = "/ingresar";
+            })
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+    
+    
+    return (
+        <div className="col-3-4@xl col-3-4@lg col-5-6@md col-1-1@sm padd-md bg-color-light border-radius-sm border-color-extra4-a20 shadow-lg">
+            <form onSubmit={handleSubmit} autoComplete="off">
+                {/* Titulo */}
+                <div className="col-1-1@xl padd-md border-bottom-color-main mb-2">
+                    <h2 className="text-2xl">
+                        Información personal - Cliente
+                    </h2>
+                </div>
+                {/* Correo Electrónico */}
+                <div className="col-1-2@xl col-1-2@lg col-1-2@md col-1-1@sm col-1-1@xs px-2">
+                    <div className="uk-flex uk-flex-column">
+                        <label htmlFor="email" className="p-2">
+                            Correo Electrónico
+                        </label>
+                        <input
+                            className="uk-input width-100 border-radius-sm"
+                            type="email"
+                            name="email"
+                            id="email"
+                            autoComplete="off"
+                            placeholder="Ingresa tu email"
+                            onChange={handleChange}
+                            required
+                        />
+                        {
+                            error.email ? <span className="uk-alert-danger px-2">{error.email}</span> : <span>&nbsp;</span>
+                        }
+                    </div>
+                </div>
+                {/* Nombre de Usuario */}
+                <div className="col-1-2@xl col-1-2@lg col-1-2@md col-1-1@sm col-1-1@xs px-2">
+                    <div className="uk-flex uk-flex-column">
+                        <label htmlFor="username" className="p-2">
+                            Nombre de usuario
+                        </label>
+                        <input
+                            className="uk-input width-100 border-radius-sm"
+                            type="text"
+                            name="username"
+                            id="username"
+                            autoComplete="off"
+                            placeholder="Ingresa tu nombre de usuario" 
+                            onChange={handleChange}
+                            required
+                        />
+                        {
+                            error.username ? <span className="uk-alert-danger px-2">{error.username}</span> : <span>&nbsp;</span>
+                        }
+                    </div>
+                </div>
+                {/* Nombres */}
+                <div className="col-1-2@xl col-1-2@lg col-1-2@md col-1-1@sm col-1-1@xs px-2">
+                    <div className="uk-flex uk-flex-column">
+                        <label htmlFor="name" className="p-2">
+                            Nombre
+                        </label>
+                        <input
+                            className="uk-input width-100 border-radius-sm"
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Ingresa tu nombre"
+                            autoComplete="off"
+                            onChange={handleChange}
+                            required
+                        />
+                        {
+                            error.name ? <span className="uk-alert-danger px-2">{error.name}</span> : <span>&nbsp;</span>
+                        }
+                    </div>
+                </div>
+                {/* Apellidos */}
+                <div className="col-1-2@xl col-1-2@lg col-1-2@md col-1-1@sm col-1-1@xs px-2">
+                    <div className="uk-flex uk-flex-column">
+                        <label htmlFor="lastname" className="p-2">
+                            Apellido
+                        </label>
+                        <input
+                            className="uk-input width-100 border-radius-sm"
+                            type="text"
+                            name="lastname"
+                            id="lastname"
+                            placeholder="Ingresa tu apellido" 
+                            onChange={handleChange}
+                            required
+                        />
+                        {
+                            error.lastname ? <span className="uk-alert-danger px-2">{error.lastname}</span> : <span>&nbsp;</span>
+                        }
+                    </div>
+                </div>
+                {/* Contraseña */}
+                <div className="col-1-2@xl col-1-2@lg col-1-2@md col-1-1@sm col-1-1@xs px-2">
+                    <div className="uk-flex uk-flex-column">
+                        <label htmlFor="password" className="p-2">
+                            Contraseña - (mínimo 6 caracteres)
+                        </label>
+                        <input
+                            className="uk-input width-100 border-radius-sm"
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="Ingresa tu contraseña" 
+                            onChange={handleChange}
+                            required
+                        />
+                        <span>&nbsp;</span>
+                    </div>
+                </div>
+                {/* Contraseña Confirmación */}
+                <div className="col-1-2@xl col-1-2@lg col-1-2@md col-1-1@sm col-1-1@xs px-2">
+                    <div className="uk-flex uk-flex-column">
+                        <label htmlFor="confirmPassword" className="p-2">
+                            Confirmar Contraseña
+                        </label>
+                        <input
+                            className="uk-input width-100 border-radius-sm"
+                            type="password"
+                            name="confirmPassword"
+                            id="confirmPassword"
+                            placeholder="Confirma tu contraseña" 
+                            onChange={handleChange}
+                            required
+                        />
+                        {
+                            error.password ? <span className="uk-alert-danger px-2">{error.password}</span> : <span>&nbsp;</span>
+                        }
+                    </div>
+                </div>
+                {/* Términos */}
+                <div className="col-1-1@xl col-1-1@lg col-1-1@md col-1-1@sm col-1-1@xs padd-md flex-center">
+                <label  htmlFor="acceptT" 
+                            className="p-2">Acepto los <a href ="/terminos-y-condiciones" target="_blank">términos y condiciones del servicio</a></label>
+                    <input
+                        className="uk-checkbox mrg-xs-t"
+                        type="checkbox"
+                        name="acceptT"
+                        id="acceptT"
+                        checked={checked}
+                        onChange={handleChangeCheckbox}
+                    />
+                </div>
+                {/* Botones */}
+                <div className="col-1-1@xl col-1-1@lg col-1-1@md col-1-1@sm col-1-1@xs padd-md">
+                    <div>
+                        <input
+                            className="uk-button uk-button-danger border-radius-sm action action-user-register-submit"
+                            type="submit"
+                            value="Registrarse"
+                        />
+                    </div>
+                    <div>
+                        <GoogleLogin
+                            clientId={GOOGLE_ID}
+                            buttonText="Registrarse con Google"
+                            onSuccess={responseGoogle}
+                            onFailure={responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                            className="width-100 mrg-lg-t flex-center"
+                        />
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    )
 }

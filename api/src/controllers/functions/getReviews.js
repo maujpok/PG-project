@@ -1,7 +1,10 @@
 const Review = require ('./../../models/Review');
 const User = require('./../../models/User')
 
-module.exports = () => {
+module.exports = ({userId}) => {
+  if(userId){
+    return Review.findOne({userId})
+  }
   return Review.aggregate([
     {$match: {rate:'Good'}},
     {$sample: {size: 4}},

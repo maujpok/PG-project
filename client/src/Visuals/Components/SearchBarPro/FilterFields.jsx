@@ -1,7 +1,9 @@
-import React, {useEffect} from 'react'
+// import React, {useEffect} from 'react'
+import React from 'react'
+
 import {useSelector} from 'react-redux'
 
-const FiltersFields = ({data,handleChange,setError}) => {
+const FiltersFields = ({data,handleChange,setError, error}) => {
 
 const categories = useSelector(state => state.constantInfoReducer.categories);
 const countries = useSelector(state => state.constantInfoReducer.countries)
@@ -29,81 +31,83 @@ const countries = useSelector(state => state.constantInfoReducer.countries)
 
 
 
-useEffect(() => {
-   if(Number(data.min) < 0 || Number(data.max) < 0){
-     setError(true)
-   }else{
-       if(Number(data.min) > Number(data.max)){
-        setError(true)
-       }else{
-           setError(false)
-       }
-   }
-})
-
+// useEffect(() => {
+//    if(Number(data.min) < 0 || Number(data.max) < 0){
+//      setError(true)
+//    }else{
+//        if(Number(data.min) > Number(data.max)){
+//         setError(true)
+//        }else{
+//            setError(false)
+//        }
+//    }
+// })
+//<div className=' flex justify-center flex-col space-y-2.5 text-center'>
     return ( 
-    <div className=' flex justify-center flex-col space-y-2.5 text-center '>
-        
-        <div>
+    <div className='wrapper'>
+        <div className="mrg-lg-t">
             <select
-                
+
                 onChange={handleChange}
                 name='profesion'
                 value={data.profesion}
-                className='inputsFiltersBtns uk-input uk-form-width-large'
+                className='inputsFiltersBtns uk-select font-main border-radius-sm'
             >
             <option>Seleccionar Profesión</option>
-              {categoriesRender}
+            {categoriesRender}
             </select>
         </div>
-        <div>
+        <div className="mrg-lg-t">
             <select
                 
                 onChange={handleChange}
                 name='country'
                 value={data.country}
-                className='inputsFiltersBtns uk-input uk-form-width-large' 
+                className='inputsFiltersBtns uk-select font-main border-radius-sm' 
             >
             <option>Seleccionar País</option>
-             {countriesRender}
+            {countriesRender}
             </select>  
         </div>
-        <div>
+        <div className="mrg-lg-t">
             <select
                 onChange={handleChange}
                 name='likes'
                 value={data.likes}
-                className='inputsFiltersBtns uk-input uk-form-width-large' 
+                className='inputsFiltersBtns uk-select font-main border-radius-sm' 
             >
             <option>Seleccionar Reputación</option>
-             {likesRender}
+            {likesRender}
             </select>  
         </div>
 
-        {/* <div>
-        <h3>Escoge tu presupuesto</h3>
-        {error && <h3>Los montos no son válidos</h3>}
-          <div>
+
+        <div className='padd-lg-b text-center font-color-light font-md font-main'>
+       
+       
+          {/* <div>
             <input
                  
                 type="number" 
-                placeholder='Mínimo USD'
+                placeholder='Presupuesto mínimo USD'
                 name='min'
                 value={data.min}
                 onChange={handleChange}
-                className='uk-width-1-6@s uk-input'
+                className='uk-input mrg-lg-t border-radius-sm font-main'
             />
             <input 
                 
                 type="number" 
-                placeholder='Máximo USD'
+                placeholder='Presupuesto máximo USD'
                 name='max'
                 value={data.max}
                 onChange={handleChange}
-                className='uk-width-1-6@s uk-input'
+                className='uk-input mrg-lg-t border-radius-sm font-main'
             />
-          </div>
-        </div> */}
+          </div> */}
+        {error && <h3 className="padd-sm-b border-bottom-color-main">Los montos no son válidos</h3>}
+        </div>
+       
     </div>
      );
 }

@@ -14,3 +14,8 @@ export function getProfessionalByUsername(username){
     .then(r=>r.data)
     .catch(r=>r.response.data);
 }
+export function updateSession(id,token){
+    return axios.put(`${BASIC_URL}/professionals/session`,{id},{headers: {jwt: token}, withCredentials: true})
+      .then(r=>r.data)
+      .catch(r=>r.response.data);
+}

@@ -1,20 +1,21 @@
 const mongoose = require('mongoose');
+require('mongoose-type-url');
 const Schema = mongoose.Schema;
 
 const user = new Schema(
     {
         name: {
             type: String,
-            // required: true,
+            required: true,
         },
         lastname: {
             type: String,
-            // required: true,
+            required: true,
         },
         username: {
             type: String,
-            // required: true,
-            //unique: true
+            required: true,
+            unique: true
         },
         email: {
             type: String,
@@ -25,6 +26,26 @@ const user = new Schema(
         password: {
             type: String,
             required: true
+        },
+        isProfessional: {
+            type: Boolean,
+            default: false
+        },
+        isAdmin: {
+            type: Boolean,
+            default: false
+        },
+        isActive: { //verificación con correo personal
+            type: Boolean,
+            default: true
+        },
+        isVerified: { //Verificación de profesional
+            type: Boolean,
+            default: true 
+        },
+        googleAccount: { //Saber si se logueó con google
+            type: Boolean,
+            default: false
         },
         country: {
             type: Schema.Types.ObjectId, ref: 'countries'
@@ -41,38 +62,40 @@ const user = new Schema(
         img: {
             type: String
         },
-        isAdmin: {
-            type: Boolean,
-            default: false
-        },
-        isProfessional: {
-            type: Boolean,
-            default: false
-        },
-        professionalRegistration: {
+        professionalRegistration: { //número de matrícula
             type: String,
             unique: false,
             required: false
         },
+        regUrl: { //link de registro de título o certificado
+            type: String
+        },
+        biography: {
+            type: String
+        },
+        title: {
+            type: String
+        },
+        institute: {
+            type:String
+        },
         cost: {
             type: Number
         },
-        category: [{type: Schema.Types.ObjectId, ref: 'categories'}],
+        category: {
+            type: Schema.Types.ObjectId, ref: 'categories'
+        },
         degree: {
             type: String
         },
         bankAccount: {
             type: String
         },
-        appointments: [{type: Schema.Types.ObjectId, ref: 'appointments'}],
+        appointments: [{
+            type: Schema.Types.ObjectId, ref: 'appointments'
+        }],
         schedule: [{
-            date: {
-                type: String
-            },
-            available: {
-                type: Boolean,
-                default: true
-            },
+            type: Schema.Types.ObjectId, ref: 'schedules'
         }],
         likes: {
             type: Number,
@@ -82,9 +105,22 @@ const user = new Schema(
             type: Number,
             default: 0
         },
-        isActive: {
-            type: Boolean,
-            default: true
+        session: {
+            type: Number,
+            default: 0
+        },
+        invoiceAsProf: [{
+            type: Schema.Types.ObjectId, ref: 'profInvoices'
+        }],
+        invoiceAsClient: [{
+            type: Schema.Types.ObjectId, ref: 'clientInvoices'
+        }],
+        meetingUrl:{
+            type: mongoose.SchemaTypes.Url
+        },
+        memberSince: {
+        type:Date,
+        default: new Date()
         }
     },
     { timestamp: true }

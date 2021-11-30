@@ -1,10 +1,11 @@
 
-import { GET_PROFESSIONALS,CLEAR_FILTERS, GET_PROF_BY_USER, FILTER_PROF,DATA_NOT_FOUND} from './../../constants'
+import { GET_PROFESSIONALS,CLEAR_FILTERS, GET_PROF_BY_USER, FILTER_PROF,DATA_NOT_FOUND, GET_PROF_SCHEDULE} from './../../constants'
 
 const initialState = {
     professionals: [],
     professionalsRender: [],
     profDetail: {},
+    profSchedule:{},
     error: false
 }
 
@@ -29,6 +30,11 @@ export default function professionalReducer(state=initialState,{type,payload}){
                 ...state,
                 professionalsRender:payload,
                 error:false
+            }
+        case GET_PROF_SCHEDULE:
+            return{
+                ...state,
+                profSchedule: payload
             }
         case DATA_NOT_FOUND:
             return{

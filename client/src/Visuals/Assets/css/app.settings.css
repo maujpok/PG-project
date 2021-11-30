@@ -18,7 +18,7 @@
 	--color-extra1-src:		255, 133, 173;
 	--color-extra2-src:		255, 194, 215;
 	--color-extra3-src:		 40,  40,  40;
-	--color-extra4-src:		120, 120, 120;
+	--color-extra4-src:		220, 220, 220;
 	--color-light-src:		255, 255, 255;
 	--color-dark-src:		  0,   0,   0;
 
@@ -67,9 +67,9 @@
 	/* Color Light */
 	--color-light:			rgba(var(--color-light-src), 1);
 	--color-light-a80:		rgba(var(--color-light-src),.8);
-	--color-light-a60:		rgba(var(--color-light-src),.8);
-	--color-light-a40:		rgba(var(--color-light-src),.8);
-	--color-light-a20:		rgba(var(--color-light-src),.8);
+	--color-light-a60:		rgba(var(--color-light-src),.6);
+	--color-light-a40:		rgba(var(--color-light-src),.4);
+	--color-light-a20:		rgba(var(--color-light-src),.2);
 
 	/* Color Dark */
 	--color-dark:			rgba(var(--color-dark-src), 1);

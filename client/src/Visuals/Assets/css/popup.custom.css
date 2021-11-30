@@ -1,0 +1,14 @@
+
+.bgpop{
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgb(0, 0, 0, 0.6);
+    z-index: 999;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

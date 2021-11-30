@@ -1,3 +1,6 @@
+*, input, select, textarea, option, button {
+    outline: none!important;
+}
 .position-middle-parent {
     position: absolute;
     left: 50%;
@@ -27,7 +30,7 @@ select {
     width: 100%;
 }
 button {
-    color: inherit!important;
+    /*color: inherit!important;*/
     font-family: inherit; /* 1 */
     font-size: 100%; /* 1 */
     font-weight: inherit;
@@ -121,10 +124,43 @@ select.pg-custom:focus {
     background-attachment: fixed;
 }
 
+.container-component-header {
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.bg-component-search {
+	background-image: url(../media/bg-component-footer.png);
+    background-position: repeat center center;
+    background-size: 240px 240px;
+}
+
 .bg-component-footer {
 	background-image: url(../media/bg-component-footer.png);
     background-position: repeat center center;
-    background-size: 120px 120px;
+    background-size: 360px 360px;
+}
+
+.bg-professionals-title {
+	background: 
+		url('https://images.unsplash.com/39/lIZrwvbeRuuzqOoWJUEn_Photoaday_CSD%20(1%20of%201)-5.jpg?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.bg-professional-title {
+	background: 
+		url('https://images.pexels.com/photos/301930/pexels-photo-301930.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1920') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .uk-dotnav > * > * {
@@ -142,6 +178,39 @@ select.pg-custom:focus {
 	transition: 0.2s ease-in-out;
 	transition-property: background-color, border-color;
 }
+
+.user-dashboard-info-tabs-content {
+    margin-top: -1px;
+    background-color: var(--color-light);
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    z-index: 999;
+}
+
+.user-dashboard-info-tab-active {
+	background-color: var(--color-light);
+    border-top: solid 1px var(--color-dark-a20);
+    border-left: solid 1px var(--color-dark-a20);
+    border-right: solid 1px var(--color-dark-a20);
+	color: inherit!important;  
+}
+
+.user-dashboard-info-tab-inactive {
+	background-color: var(--color-extra4-a60);
+    border-top: solid 1px var(--color-dark-a20);
+    border-left: solid 1px var(--color-dark-a20);
+    border-right: solid 1px var(--color-dark-a20);
+	color: inherit!important;  
+    -moz-box-shadow: inset 0 -8px 4px -8px #777;
+    -webkit-box-shadow: inset 0 -8px 4px -8px #777;
+    box-shadow: inset 0 -8px 4px -8px #777;
+}
+.user-dashboard-info-tab-inactive:hover {
+	background-color: var(--color-extra4-a20);
+	color: var(--color-primary)!important;  
+}
+
 /* Hover + Focus */
 .uk-dotnav > * > :hover,
 .uk-dotnav > * > :focus {
@@ -158,4 +227,42 @@ select.pg-custom:focus {
 .uk-dotnav > .uk-active > * {
 	background-color: var(--color-main);
 	border-color: var(--color-light);
+}
+
+.ud-professional-card-border {
+    border-top: solid 4px var(--color-main);
+}
+
+/* Accordion */
+.uk-accordion-title {
+    background-color: var(--color-light);
+    border: solid 2px var(--color-main);
+}
+.uk-accordion-title:hover,
+.uk-accordion-title:focus {
+    background-color: var(--color-main-a80);
+    border: solid 2px var(--color-main);
+    color: var(--color-light);
+}
+
+table.bills tbody tr:nth-child(odd) {
+    background-color: var(--color-light);
+}
+table.bills tbody tr:nth-child(even) {
+    background-color: var(--color-extra4-a20);
+}
+
+.custom-scroll ::-webkit-scrollbar-track {
+    box-shadow: none;
+    background-color: #999;
+    padding: 5px
+}
+
+.custom-scroll ::-webkit-scrollbar {
+    width: 4px;
+    background-color: #fab400
+}
+
+.custom-scroll ::-webkit-scrollbar-thumb {
+    background-color: #222
 }

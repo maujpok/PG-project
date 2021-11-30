@@ -1,5 +1,3 @@
-
-
 .FooterPrimaryDiv{
     background-color:rgba(0, 0, 0, 0.8);
     display: flex;
@@ -211,10 +209,10 @@
     max-height: 25vh;
 }
 
-.WeekTipsCard::-webkit-scrollbar {
+.WeekTipsCard::-webkit-scrollbar, .scroll::-webkit-scrollbar {
     width: 6px;
     height: 8px;
-}.WeekTipsCard::-webkit-scrollbar-thumb {
+}.WeekTipsCard::-webkit-scrollbar-thumb, .scroll::-webkit-scrollbar-thumb {
     background: rgba(128, 128, 128, 0.2);;
     border-radius: 4px;
 }
@@ -266,6 +264,136 @@
     width: 200px;
 }
 
-.miPerfilCustomHeight{
-    height: 550px;
+.nbg{
+    min-height: 1100px;
+}
+.video {  
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+}
+
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    }
+
+    /* Add some content at the bottom of the video/page */
+    .content {
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+    }
+
+    /* Style the button used to pause/play the video */
+    #myBtn {
+    width: 200px;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    }
+
+    #myBtn:hover {
+    background: #ddd;
+    color: black;
+    }
+
+
+/*    //////////////////////////////////////////////////////////////// */
+
+.btn-prof-info span {
+    color: black;
+}
+.btn-prof-info:hover{
+    background-color: white;
+}
+.btn-prof-info:hover span{
+    color: #FF214F;
+}
+.full-info-container{
+    margin-top: 0rem;
+}
+.full-info-up{
+    background-color: #ffffff;
+    box-shadow: 0px 0px 5px lightgrey ;
+    border: 1px lightgrey solid;
+    width: 100%;
+    min-height: 21vh;
+    padding: 1rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    border-radius: .5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Ubuntu' sans-serif;
+    white-space: pre-line;
+}
+.full-info-span{
+    font-weight: bold;
+    font-size:1.2rem;
+    margin-top: 1rem;
+}
+.full-info-down{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-height: 10rem;
+    position: inherit;
+}
+.little-box{
+    width: 23%;
+    border: 0.5px lightgrey solid;
+    border-radius: .5rem;
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: .1rem;
+    box-shadow: 0px 0px 5px lightgrey;
+    text-align: center;
+    font-weight: bold;
+}
+.little-box span{
+    font-weight: bold;
+    margin-bottom: .2rem;
+    color: #FF214F;
+}
+.little-box h3{
+    font-size: 1.2rem;
+}
+.schedules-setter{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    align-items: center;
+    padding: 2rem;
+}
+.swal2-styled.swal2-confirm{
+    color: #ffffff !important;
+    background-color: green !important;
+}
+.swal2-styled.swal2-cancel {
+    color: #ffffff !important;
+    background-color: red !important;
+}
+
+.btngb{
+    border-top-left-radius: 2vh;
+    border-top-right-radius: 2vh;
 }

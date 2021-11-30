@@ -12,15 +12,15 @@ const Slogan = () => {
                                 Soluciones al instante
                             </div>
                             <div className='mrg-xl-t font-xl font-main font-color-light'>
-                                Consulta a profesionales desde la comodidad de tu hogar, sin retrasos por el tráfico, ni por cambios climáticos, elige, seleciona una cita y soluciona el problema que no te deja dormir
+                                Consulta a profesionales desde la comodidad de tu hogar, sin retrasos por el tráfico, ni por cambios climáticos, elige, selecciona una cita y soluciona el problema que no te deja dormir
                             </div>
                         </div>
                         <div className="element-sm-xs">
                             <div className='font-2x font-main font-color-light'>
-                                Lorem ipsum dolor sit amet adipiscing elit...
+                                Soluciones al instante
                             </div>
                             <div className='mrg-xl-t font-main font-color-light'>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididuntLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                Consulta a profesionales desde la comodidad de tu hogar, sin retrasos por el tráfico, ni por cambios climáticos, elige, selecciona una cita y soluciona el problema que no te deja dormir
                             </div>
                         </div>                        
                     </div>

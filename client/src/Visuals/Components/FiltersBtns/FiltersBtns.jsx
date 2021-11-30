@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import '../../Assets/CustomAR.css'
 import {useSelector, useDispatch} from 'react-redux'
 import { filterProfessional } from '../../../Controllers/actions/professionalsActions';
+import {updateCategCount} from '../../../ApiReq/constantInfo'
 
 const FiltersBtns = () => {
 let history = useHistory();
@@ -41,6 +42,7 @@ return setInvalid(true);
 
 const handleSubmit = e => {
     e.preventDefault();
+    if(data.profesion!=='') updateCategCount({name:data.profesion});
     dispatch(filterProfessional(data,professionals))
     setData({
         country: '',
@@ -64,7 +66,7 @@ const handleSubmit = e => {
                     onChange={handleChange}
                     name='profesion'
                     value={data.profesion}
-                    className='inputsFiltersBtns* uk-select width-100 bg-color-transparent border-color-light pg-custom'
+                    className='inputsFiltersBtns* uk-select width-100 bg-color-transparent border-radius-sm border-color-light pg-custom'
                 >
                     <option readOnly>Seleccionar Profesión</option>
                     {categoriesRender}
@@ -78,7 +80,7 @@ const handleSubmit = e => {
                     onChange={handleChange}
                     name='country'
                     value={data.country}
-                    className='inputsFiltersBtns* uk-select width-100 bg-color-transparent border-color-light pg-custom' 
+                    className='inputsFiltersBtns* uk-select width-100 bg-color-transparent border-radius-sm border-color-light pg-custom' 
                 >
                     <option readOnly>Seleccionar País</option>
                     {countriesRender}
@@ -86,7 +88,7 @@ const handleSubmit = e => {
             </div>    
             <div>  
                     <input 
-                        className="btnFiltersBtns* width-100 mrg-xl-t padd-md-tb font-main font-xl action action-slogan"
+                        className="btnFiltersBtns* width-100 mrg-xl-t padd-md-tb font-main border-radius-sm font-xl action action-slogan"
                         type="submit" 
                         value="Buscar"
                         disabled={invalid}

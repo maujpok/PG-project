@@ -3,7 +3,7 @@ import React from 'react'
 const NameSearch = ({data,handleChange,}) => {
     return ( 
         <div className=' flex justify-center flex-col space-y-2.5 text-center '>
-            <div>
+            <div className="mrg-lg-t">
                 <input 
                 type="text"
                 placeholder='Buscar Profesional por Nombre'
@@ -11,10 +11,10 @@ const NameSearch = ({data,handleChange,}) => {
                 value={data.name}
                 onChange={handleChange}
                 autoComplete='off'
-                className="uk-input uk-form-width-large" />
+                className="uk-input border-radius-sm font-main" />
             </div>
         </div>
-     );
+    );
 }
  
 export default NameSearch;

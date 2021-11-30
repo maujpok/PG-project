@@ -1,6 +1,6 @@
 export function Filter(obj,arr){
     const {name,profesion, country, min,max, likes} = obj
-
+    // console.log(arr)
     if(name){
         let nameResult = name.split(' ').map(e => e.charAt(0).toUpperCase() + e.slice(1)).join( ' ');
        let nameResultReverse = nameResult.split(' ').reverse().join(' ')
@@ -13,7 +13,7 @@ export function Filter(obj,arr){
             );
     }
     if(profesion){
-        arr = arr.filter(e => e.category[0].name === profesion);
+        arr = arr.filter(e => e.category.name === profesion);
     }
     if(country){
      
@@ -44,9 +44,9 @@ export function Filter(obj,arr){
                 break;
         }
     }
-    // if(min && max){
-    //     console.log(200)
-    // }
+    if(min && max){
+       alert('jaja no funciona aun porque no llega precio')
+    }
         
      return arr
 }

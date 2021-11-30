@@ -40,11 +40,11 @@ function WeekTips() {
                 </div>
                 */}
                 <div 
-                    data-uk-slideshow="autoplay:true; animation:slide; ratio:5:1"
+                    data-uk-slideshow="autoplay:true; animation:slide; ratio: false"
                     className="wrapper position-relative"
                     tabIndex="-1"
                 >
-                    <ul className="uk-slideshow-items">
+                    <ul className="uk-slideshow-items" uk-height-viewport="offset-top: true; offset-bottom: 60">
                         {
                             tipsStore && tipsStore.map(element => {
                                 return <WeekTipsCard key={element._id} text={element.text} />

@@ -1,24 +1,25 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from '../../constants'
+// import { ADD_TO_CART, REMOVE_FROM_CART } from '../../constants'
 
-const initialState = {
-    appointments: [],
+// const initialState = {
+//     appointments: [],
     
-}
+// }
 
-export default function cartReducer(state=initialState, action){
-    switch (action.type){
-        case ADD_TO_CART:
-            return {
-                ...state,
-                appointments: [...state.appointments, action.payload]
-            };
-        case REMOVE_FROM_CART:
-            return {
-                ...state,
-                appointments: state.appointments.filter(a => a.appointment.date !== action.payload)
+// export default function cartReducer(state=initialState, action){
+//     switch (action.type){
+//         case ADD_TO_CART:
+//             console.log('reduxxx');
+//             return {
+//                 ...state,
+//                 appointments: [...state.appointments, action.payload]
+//             };
+//         case REMOVE_FROM_CART:
+//             return {
+//                 ...state,
+//                 appointments: state.appointments.filter(a => a.date !== action.payload)
                 
-            }
-        default:
-            return state;
-    }
-}
+//             }
+//         default:
+//             return state;
+//     }
+// }

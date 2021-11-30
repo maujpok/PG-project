@@ -7,14 +7,14 @@ export function getCategories(feat){
     .catch(r=>r.response.data)
 }
 
-export function getTips(){
-    return axios.get(`${BASIC_URL}/tips`)
+export function getTips(userId){
+    return axios.get(`${BASIC_URL}/tips${userId ? '?userId='+userId : ''}`)
     .then(r=>r.data)
     .catch(r=>r.response.data)
 }
 
-export function getReviews(){
-    return axios.get(`${BASIC_URL}/reviews`)
+export function getReviews(userId){
+    return axios.get(`${BASIC_URL}/reviews${userId ? '?userId='+userId : ''}`)
     .then(r=>r.data)
     .catch(r=>r.response.data)
 }
@@ -23,4 +23,10 @@ export function getCountries(){
     return axios.get(`${BASIC_URL}/countries`)
     .then(r=>r.data)
     .catch(r=>r.response.data)
+}
+
+export function updateCategCount(data){
+    return axios.put(`${BASIC_URL}/categories`,data)
+      .then(r=>r.data)
+      .catch(r=>r.response.data)
 }

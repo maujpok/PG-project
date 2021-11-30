@@ -1,5 +1,6 @@
 const {Router} = require("express");
 const router = Router();
+const passport = require('passport');
 const {getCategories,updateCategCount} = require('../controllers/index.js');
 
 router.get('/',(req,res,next)=>{
@@ -9,7 +10,7 @@ router.get('/',(req,res,next)=>{
     .catch(err => next(err));
 });
 
-router.put('/',(req,res,next)=>{
+router.put('/', (req,res,next)=>{
   let data = req.body;
   updateCategCount(data)
     .then(result => res.json(result))

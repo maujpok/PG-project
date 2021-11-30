@@ -6,18 +6,33 @@ import {
     PUT_ADMIN_APPOINTMENT,
     POST_ADMIN_CATEGORY,
     PUT_ADMIN_CATEGORY,
-    DELETE_ADMIN_CATEGORY
-} from './../../constants'
+    DELETE_ADMIN_CATEGORY,
+  DELETE_ADMIN_COUNTRY,
+  POST_ADMIN_COUNTRY,
+    PUT_ADMIN_TIPS,GET_ADMIN_TIPS,DELETE_ADMIN_TIPS,POST_ADMIN_TIPS,
+    GET_ADMIN_REVIEWS,PUT_ADMIN_REVIEWS,DELETE_ADMIN_REVIEWS
+} from '../../constants'
 
 const initialState = {
     adminUsers: [],
     userDeleted: {},
     userModified: {},
     appointmentDeleted: {},
-    appoinmentModified: {},
+    appointmentModified: {},
     categoryPosted: {},
     categoryModified: {},
-    categoryDeleted: {}
+    categoryDeleted: {},
+    countryDeleted: {},
+    countryPosted: {},
+    adminTips:[],
+    tipPosted:{},
+    tipModified:{},
+    tipDeleted:{},
+    adminReviews:[],
+    reviewModified:{},
+    reviewDeleted:{},
+    adminInvoices:[],
+    adminReports:[]
 }
 
 export default function adminReducer(state=initialState,{type,payload}){
@@ -45,7 +60,7 @@ export default function adminReducer(state=initialState,{type,payload}){
         case PUT_ADMIN_APPOINTMENT:
             return {
                 ...state,
-                appoinmentModified: payload
+                appointmentModified: payload
             }
         case POST_ADMIN_CATEGORY:
             return { 
@@ -61,6 +76,61 @@ export default function adminReducer(state=initialState,{type,payload}){
             return {
                 ...state,
                 categoryDeleted: payload
+            }
+        case DELETE_ADMIN_COUNTRY:
+            return {
+                ...state,
+                countryDeleted: payload
+            }
+        case POST_ADMIN_COUNTRY:
+            return {
+                ...state,
+                countryPosted: payload
+            }
+        case GET_ADMIN_TIPS:
+            return {
+                ...state,
+                adminTips: payload
+            }
+        case PUT_ADMIN_TIPS:
+            return {
+                ...state,
+                tipModified: payload
+            }
+        case POST_ADMIN_TIPS:
+            return {
+                ...state,
+                tipPosted: payload
+            }
+        case DELETE_ADMIN_TIPS:
+            return {
+                ...state,
+                tipDeleted: payload
+            }
+        case GET_ADMIN_REVIEWS:
+            return {
+                ...state,
+                adminReviews: payload
+            }
+        case PUT_ADMIN_REVIEWS:
+            return {
+                ...state,
+                reviewModified: payload
+            }
+        case DELETE_ADMIN_REVIEWS:
+            return {
+                ...state,
+                reviewDeleted: payload
+            }
+        case "GET_ADMIN_INVOICES":
+            return {
+                ...state,
+                adminInvoices: payload
+            }
+        case "GET_ADMIN_REPORTS":
+            return {
+                ...state,
+                adminReports: payload
             }
         default:
             return {

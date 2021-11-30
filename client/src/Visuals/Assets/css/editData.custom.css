@@ -1,0 +1,30 @@
+
+
+.editProfData{
+    overflow-y:scroll;
+    position: relative;
+    top: -50px;
+}
+
+.editProfData::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}.editProfData::-webkit-scrollbar-thumb {
+    background: #868686;
+    border-radius: 4px;
+}
+.editProfData::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+.editProfData::-webkit-scrollbar-thumb:active {
+    background-color: #b3b3b3;
+}
+.editProfData::-webkit-scrollbar-track {
+    background: #ffffff00;
+    border-radius: 4px;
+}
+.editProfData::-webkit-scrollbar-track:hover,
+.editProfData::-webkit-scrollbar-track:active {
+    background: rgba(212, 212, 212, 0);
+}
